@@ -148,6 +148,10 @@ async def account_login(bot: Client, m: Message):
     else:
         count = int(raw_text)
 
+    raw_text12 = input12.text
+    thread = int(raw_text12)
+    clist = []
+
     try:
         for i in range(arg, len(links)):
 
