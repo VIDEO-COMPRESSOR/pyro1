@@ -148,17 +148,13 @@ async def account_login(bot: Client, m: Message):
     else:
         count = int(raw_text)
 
-    raw_text12 = input12.text
-    thread = int(raw_text12)
-    clist = []
-
     try:
         for i in range(arg, len(links)):
 
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()
 
-            if raw_text2 == "144":
+            if raw_text2 == "0":
 
                 cmd = f'yt-dlp -F "{url}"'
                 k = await helper.run(cmd)
@@ -173,143 +169,6 @@ async def account_login(bot: Client, m: Message):
                 else:
                     for data1 in out:
                         ytf = out[data1]
-            elif raw_text2 == "180":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '320x180' in out:
-                    ytf = out['320x180']
-                elif '426x240' in out:
-                    ytf = out['426x240']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data2 in out:
-                        ytf = out[data2]
-            elif raw_text2 == "240":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '426x240' in out:
-                    ytf = out['426x240']
-                elif '426x234' in out:
-                    ytf = out['426x234']
-                elif '480x270' in out:
-                    ytf = out['480x270']
-                elif '480x272' in out:
-                    ytf = out['480x272']
-                elif '640x360' in out:
-                    ytf = out['640x360']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data3 in out:
-                        ytf = out[data3]
-            elif raw_text2 == "360":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '640x360' in out:
-                    ytf = out['640x360']
-                elif '638x360' in out:
-                    ytf = out['638x360']
-                elif '636x360' in out:
-                    ytf = out['636x360']
-                elif '768x432' in out:
-                    ytf = out['768x432']
-                elif '638x358' in out:
-                    ytf = out['638x358']
-                elif '852x316' in out:
-                    ytf = out['852x316']
-                elif '850x480' in out:
-                    ytf = out['850x480']
-                elif '848x480' in out:
-                    ytf = out['848x480']
-                elif '854x480' in out:
-                    ytf = out['854x480']
-                elif '852x480' in out:
-                    ytf = out['852x480']
-                elif '854x470' in out:
-                    ytf = out['852x470']
-                elif '1280x720' in out:
-                    ytf = out['1280x720']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data4 in out:
-                        ytf = out[data4]
-            elif raw_text2 == "480":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '854x480' in out:
-                    ytf = out['854x480']
-                elif '852x480' in out:
-                    ytf = out['852x480']
-                elif '854x470' in out:
-                    ytf = out['854x470']
-                elif '768x432' in out:
-                    ytf = out['768x432']
-                elif '848x480' in out:
-                    ytf = out['848x480']
-                elif '850x480' in out:
-                    ytf = ['850x480']
-                elif '960x540' in out:
-                    ytf = out['960x540']
-                elif '640x360' in out:
-                    ytf = out['640x360']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data5 in out:
-                        ytf = out[data5]
-
-            elif raw_text2 == "720":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '1280x720' in out:
-                    ytf = out['1280x720']
-                elif '1280x704' in out:
-                    ytf = out['1280x704']
-                elif '1280x474' in out:
-                    ytf = out['1280x474']
-                elif '1920x712' in out:
-                    ytf = out['1920x712']
-                elif '1920x1056' in out:
-                    ytf = out['1920x1056']
-                elif '854x480' in out:
-                    ytf = out['854x480']
-                elif '640x360' in out:
-                    ytf = out['640x360']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data6 in out:
-                        ytf = out[data6]
-            elif "player.vimeo" in url:
-                if raw_text2 == '144':
-                    ytf = 'http-240p'
-                elif raw_text2 == "240":
-                    ytf = 'http-240p'
-                elif raw_text2 == '360':
-                    ytf = 'http-360p'
-                elif raw_text2 == '480':
-                    ytf = 'http-540p'
-                elif raw_text2 == '720':
-                    ytf = 'http-720p'
-                else:
-                    ytf = 'http-360p'
             else:
                 cmd = f'yt-dlp -F "{url}"'
                 k = await helper.run(cmd)
@@ -366,9 +225,9 @@ async def account_login(bot: Client, m: Message):
                         count += 1
                         # time.sleep(1)
                         await reply.delete(True)
-                        time.sleep(1)
+                        #time.sleep(1)
                         os.remove(ka)
-                        time.sleep(1)
+                        #time.sleep(1)
                     except FloodWait as e:
                         await m.reply_text(str(e))
                         time.sleep(e.x)
