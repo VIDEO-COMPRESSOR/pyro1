@@ -93,7 +93,7 @@ async def account_login(bot: Client, m: Message):
     #input: Message = await bot.listen(editable.chat.id)
     #x = await input.download()
     #await input.delete(True)
-
+    await m.reply("Check 1") 
     path = f"./downloads/{m.chat.id}"
 
     try:
@@ -105,11 +105,12 @@ async def account_login(bot: Client, m: Message):
             links.append(i.split(":", 1))
         #os.remove(x)
         # print(len(links))
+        await m.reply("Check 2") 
     except:
         await m.reply_text("Invalid file input.")
         #os.remove(x)
         return
-
+    await m.reply("Check 3") 
     editable = await m.reply_text(
         f"Total links found are **{len(links)}**"
     )
