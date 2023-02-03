@@ -124,7 +124,7 @@ async def account_login(bot: Client, m: Message):
 
     #editable = await m.reply_text("**Enter Title**")
     #input0: Message = await bot.listen(editable.chat.id)
-    raw_text0 = ""
+    raw_text0 = "CLASSPLUS"
 
     #await m.reply_text("**Enter resolution**")
     #input2: Message = await bot.listen(editable.chat.id)
@@ -206,7 +206,7 @@ async def account_login(bot: Client, m: Message):
             try:
                 Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-** `{url}`"
                 prog = await m.reply_text(Show)
-                cc = f"**Name »** {name1} {res}.mkv\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
+                cc = f"**Name »** {name1} {res}.mp4\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
                 cc1 = f"**Name »** ** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
                 
                 if cmd == "pdf" or ".pdf" in url or ".pdf" in name:
