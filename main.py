@@ -30,12 +30,12 @@ import threading
 
 def print_cube():
     m.reply_text("**Now in Downloading ✅*")
-    res_file = await helper.download_video(url, cmd, name)
+    res_file = helper.download_video(url, cmd, name)
     filename = res_file
-    await m.reply_text("**Now in uploading ✅**")
-    await helper.send_vid(bot, m, cc, filename, thumb, name,
+    m.reply_text("**Now in uploading ✅**")
+    helper.send_vid(bot, m, cc, filename, thumb, name,
                                           prog)
-    await m.reply_text("**Done video✅**")
+    m.reply_text("**Done video✅**")
     count += 1
  
  
