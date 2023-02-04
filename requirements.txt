@@ -16,3 +16,4 @@ python-decouple
 progressor
 helper
 cloudscraper
+threading
