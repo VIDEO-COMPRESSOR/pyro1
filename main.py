@@ -124,7 +124,7 @@ async def FunctionforThread():
                     except FloodWait as e:
                         await m.reply_text(str(e))
                         time.sleep(e.x)
-                        continue
+                       # continue
                 else:
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
@@ -137,7 +137,7 @@ async def FunctionforThread():
                 await m.reply_text(
                     f"**downloading failed ❌**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`"
                 )
-                continue
+                #continue
 
 
 
