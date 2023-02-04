@@ -120,7 +120,7 @@ async def account_login(bot: Client, m: Message):
                 Show = f"**Downloading Videos**\n"
                 prog = await m.reply_text(Show)
                 try:
-                  helper.pull_run(thread,cmd)
+                  helper.run(thread,cmd)
                   for i in range(len(cmd)):
                     try:
                         name = (cmd[i][6])
