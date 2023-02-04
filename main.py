@@ -39,7 +39,7 @@ sudo_groups = [
     int(chat) for chat in os.environ.get("GROUPS","-1001476904215").split(",") if chat != '']
 
 
-@bot.on_message(filters.command(["down"]))
+@bot.on_message(filters.command(["pro"]))
 async def account_login(bot: Client, m: Message):
     global cancel
     cancel = False
