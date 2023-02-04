@@ -38,8 +38,15 @@ sudo_users = auth_users
 sudo_groups = [
     int(chat) for chat in os.environ.get("GROUPS","-1001476904215").split(",") if chat != '']
 
-
-
+async def ntt():
+       await m.reply_text("**Now in Downloading ✅*")
+       res_file = await helper.download_video(url, cmd, name)
+       filename = res_file
+       await m.reply_text("**Now in uploading ✅**")
+       await helper.send_vid(bot, m, cc, filename, thumb, name,
+                               prog)
+       await m.reply_text("**Done video✅**")
+       count += 1
 
 
 
@@ -192,14 +199,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    await m.reply_text("**Now in Downloading ✅*")
-                    res_file = await helper.download_video(url, cmd, name)
-                    filename = res_file
-                    await m.reply_text("**Now in uploading ✅**")
-                    await helper.send_vid(bot, m, cc, filename, thumb, name,
-                                          prog)
-                    await m.reply_text("**Done video✅**")
-                    count += 1
+                    ntt()
                    
                     
             except Exception as e:
