@@ -29,39 +29,6 @@ import os
 import io
 #import pycurl
 
-import urllib
-import urllib.parse
-import requests
-import json
-import subprocess
-from pyrogram.types.messages_and_media import message
-import helper
-from pyromod import listen
-from pyrogram.types import Message
-import tgcrypto
-import pyrogram
-from pyrogram import Client, filters
-from pyrogram.types.messages_and_media import message
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram.errors import FloodWait
-import time
-from pyrogram.types import User, Message
-from p_bar import progress_bar
-import subprocess
-from subprocess import getstatusoutput
-import logging
-import os
-import sys
-import re
-from pyrogram import Client as bot
-import cloudscraper
-#from Crypto.Cipher import AES
-#from Crypto.Util.Padding import unpad
-from base64 import b64encode, b64decode
-
-
-
-
 
 
 
@@ -78,20 +45,106 @@ sudo_groups = [
 
 
 
-keyboard = InlineKeyboardMarkup(
-    [
-        [
-            InlineKeyboardButton(
-                text="Devloper",
-                url="https://pornhub.com/",
-            ),
-            InlineKeyboardButton(
-                text="Repo",
-                url="https://lund-chushLoo.com/repo",
-            ),
-        ],
-    ]
-)
+
+def FunctionforThread():
+            if raw_text2 == "0":
+
+                cmd = f'yt-dlp -F "{url}"'
+                k = await helper.run(cmd)
+                out = helper.vid_info(str(k))
+                # print(out)
+                if '256x144' in out:
+                    ytf = f"{out['256x144']}"
+                elif '320x180' in out:
+                    ytf = out['320x180']
+                elif 'unknown' in out:
+                    ytf = out["unknown"]
+                else:
+                    for data1 in out:
+                        ytf = out[data1]
+            else:
+                cmd = f'yt-dlp -F "{url}"'
+                k = await helper.run(cmd)
+                out = helper.vid_info(str(k))
+                for dataS in out:
+                    ytf = out[dataS]
+
+            try:
+                if "unknown" in out:
+                    res = "NA"
+                else:
+                    res = list(out.keys())[list(out.values()).index(ytf)]
+
+                name = f'{str(count).zfill(3)}) {name1} {res}'
+            except Exception:
+                res = "NA"
+
+            # if "youtu" in url:
+            # if ytf == f"'bestvideo[height<={raw_text2}][ext=mp4]+bestaudio[ext=m4a]'" or "acecwply" in url:
+            if "acecwply" in url:
+                cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
+            elif "youtu" in url:
+                cmd = f'yt-dlp -i -f "bestvideo[height<={raw_text2}]+bestaudio" --no-keep-video --remux-video mkv --no-warning "{url}" -o "{name}.%(ext)s"'
+            elif "player.vimeo" in url:
+                cmd = f'yt-dlp -f "{ytf}+bestaudio" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+            elif "m3u8" or "livestream" in url:
+                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+            elif ytf == "0" or "unknown" in out:
+                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+            elif ".pdf" or "download" in url:
+                cmd = "pdf"
+            else:
+                cmd = f'yt-dlp -f "{ytf}+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+
+            try:
+                Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-** `{url}`"
+                prog = await m.reply_text(Show)
+                cc = f"**Name »** {name1} {res}.mp4\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
+                cc1 = f"**Name »** ** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
+                
+                if cmd == "pdf" or ".pdf" in url or ".pdf" in name:
+                    try:
+                        ka = await helper.aio(url, name)
+                        await prog.delete(True)
+                        time.sleep(1)
+                        reply = await m.reply_text(f"Uploading - ```{name}```")
+                        time.sleep(1)
+                        start_time = time.time()
+                        await m.reply_document(
+                            ka,
+                            caption=
+                            f"**Name »** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
+                        )
+                        count += 1
+                        # time.sleep(1)
+                        await reply.delete(True)
+                        #time.sleep(1)
+                        os.remove(ka)
+                        #time.sleep(1)
+                    except FloodWait as e:
+                        await m.reply_text(str(e))
+                        time.sleep(e.x)
+                        continue
+                else:
+                    res_file = await helper.download_video(url, cmd, name)
+                    filename = res_file
+                    await helper.send_vid(bot, m, cc, filename, thumb, name,
+                                          prog)
+                    count += 1
+                    time.sleep(1)
+
+            except Exception as e:
+                await m.reply_text(
+                    f"**downloading failed ❌**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`"
+                )
+                continue
+
+
+
+
+
+
+
 
 
 @bot.on_message(filters.command(["pyro"]))
@@ -187,227 +240,10 @@ async def account_login(bot: Client, m: Message):
 
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()
-
-            if raw_text2 == "0":
-
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '256x144' in out:
-                    ytf = f"{out['256x144']}"
-                elif '320x180' in out:
-                    ytf = out['320x180']
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                else:
-                    for data1 in out:
-                        ytf = out[data1]
-            else:
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                for dataS in out:
-                    ytf = out[dataS]
-
-            try:
-                if "unknown" in out:
-                    res = "NA"
-                else:
-                    res = list(out.keys())[list(out.values()).index(ytf)]
-
-                name = f'{str(count).zfill(3)}) {name1} {res}'
-            except Exception:
-                res = "NA"
-
-            # if "youtu" in url:
-            # if ytf == f"'bestvideo[height<={raw_text2}][ext=mp4]+bestaudio[ext=m4a]'" or "acecwply" in url:
-            if "acecwply" in url:
-                cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
-            elif "youtu" in url:
-                cmd = f'yt-dlp -i -f "bestvideo[height<={raw_text2}]+bestaudio" --no-keep-video --remux-video mkv --no-warning "{url}" -o "{name}.%(ext)s"'
-            elif "player.vimeo" in url:
-                cmd = f'yt-dlp -f "{ytf}+bestaudio" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-            elif "m3u8" or "livestream" in url:
-                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-            elif ytf == "0" or "unknown" in out:
-                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-            elif ".pdf" or "download" in url:
-                cmd = "pdf"
-            else:
-                cmd = f'yt-dlp -f "{ytf}+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-
-            try:
-                Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-** `{url}`"
-                prog = await m.reply_text(Show)
-                cc = f"**Name »** {name1} {res}.mp4\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
-                cc1 = f"**Name »** ** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
-                
-                if cmd == "pdf" or ".pdf" in url or ".pdf" in name:
-                    try:
-                        ka = await helper.aio(url, name)
-                        await prog.delete(True)
-                        time.sleep(1)
-                        reply = await m.reply_text(f"Uploading - ```{name}```")
-                        time.sleep(1)
-                        start_time = time.time()
-                        await m.reply_document(
-                            ka,
-                            caption=
-                            f"**Name »** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
-                        )
-                        count += 1
-                        # time.sleep(1)
-                        await reply.delete(True)
-                        #time.sleep(1)
-                        os.remove(ka)
-                        #time.sleep(1)
-                    except FloodWait as e:
-                        await m.reply_text(str(e))
-                        time.sleep(e.x)
-                        continue
-                else:
-                    res_file = await helper.download_video(url, cmd, name)
-                    filename = res_file
-                    await helper.send_vid(bot, m, cc, filename, thumb, name,
-                                          prog)
-                    count += 1
-                    time.sleep(1)
-
-            except Exception as e:
-                await m.reply_text(
-                    f"**downloading failed ❌**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`"
-                )
-                continue
+            FunctionforThread()
 
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
 
-@bot.on_message(filters.command(["down"]))
-async def account_login(bot: Client, m: Message):
-    global cancel
-    cancel = False
-    editable = await m.reply_text("**Send Text file containing Urls**")
-    #input: Message = await bot.listen(editable.chat.id)
-    #x = await input.download()
-  #  await input.delete(True)
-
-    path = f"./downloads/"
-
-    try:    
-        with open("NTT.txt", "r") as f:
-            content = f.read()
-        content = content.split("\n")
-        links = []
-        for i in content:
-            links.append(i.split(":", 1))
-        #os.remove(x)
-        # print(len(links))
-    except:
-        await m.reply_text("Invalid file input.")
-        #os.remove(x)
-        return
-    editable = await m.reply_text(f"Total links found are **{len(links)}**\n\nSend From where you want to download initial is **0**")
-    #input1: Message = await bot.listen(editable.chat.id)
-    raw_text = "0"
-    try:
-        arg = int(raw_text)
-    except:
-        arg = 0
-    editable = await m.reply_text("**Enter Batch Name**")
-    #input01: Message = await bot.listen(editable.chat.id)
-    mm = ""   
-    await m.reply_text("**Downloaded By**")
-    #input0: Message = await bot.listen(editable.chat.id)
-    raw_text0 = ""
-    
-    await m.reply_text("**Enter resolution**")
-    #input2: Message = await bot.listen(editable.chat.id)
-    raw_text4 = "0"
-
-    editable4= await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/cef3ef6ee69126c23bfe3.jpg```\n\nor Send **no**")
-    #input6 = message = await bot.listen(editable.chat.id)
-    raw_text6 = "no"
-    thumb = "no"
-    if thumb.startswith("http://") or thumb.startswith("https://"):
-        getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
-        thumb = "thumb.jpg"
-    else:
-        thumb == "no"
-        
-    if raw_text =='0':
-        count =1
-    else:       
-        #count =int(raw_text)
-        count = int(raw_text)
-    await m.reply_text("**Enter No Threads**")
-    #input12: Message = await bot.listen(editable.chat.id)
-    raw_text12 = "20"
-    thread = int(raw_text12)
-    clist = []
-    for i in range(arg, len(links)):
-        try:
-          url = links[i][1]
-          name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
-        except IndexError:
-          pass
-        if "youtu" in url:
-            clist.append(['yt-dlp','-S',f'height:{raw_text4},ext:mp4','-N','100','-o',f'{name1}.mp4',url])
-        elif ".pdf" in url:
-            clist.append(['yt-dlp','-o',f'{name1}.pdf',url])
-        else:
-          clist.append(['yt-dlp','-S',f'height:{raw_text4},ext:mp4','-N','100','-o',f'{name1}.mp4',url])
-    try:
-        for i in range(0, len(clist),thread):
-                cmd = clist[i: i + thread]
-                #print(cmd)
-                Show = f"**Downloading Videos**\n"
-                prog = await m.reply_text(Show)
-                try:
-                 # helper.pull_run(thread,cmd)
-                  for i in range(len(cmd)):
-                    try:
-                        name = (cmd[i][6])
-                    except:
-                        name= cmd[i][2]
-                    #print(name)
-                    await prog.delete (True)
-                    if "pdf" in name:
-                        #print("pdf found")
-                        cc2 = f'{str(count).zfill(2)}. {name}\n\n**Batch »** {mm}\n**Dowloaded By »** {raw_text0}'
-                        await m.reply_document(name,caption=cc2)
-                        os.remove(f"{name}")
-                        count+=1
-                        continue 
-                    else:
-                        #print("Video found")
-                        reply = await m.reply_text("Uploading Video")
-                        try:
-                            if thumb == "no":
-                                thumbnail = f"{name}.jpg"
-                            else:
-                                thumbnail = "thumb.jpg"
-                        except Exception as e:
-                            await m.reply_text(str(e))
-                            continue
-                        await prog.delete (True)
-                        start_time = time.time()
-                        cc = f'{str(count).zfill(2)}. {name} - {raw_text4}p\n\n**Batch »** {mm}\n**Dowloaded By »** {raw_text0}'
-                        dur = int(helper.duration(name))
-                        subprocess.run(f'ffmpeg -i "{name}" -ss 00:01:00  -y -vframes 1 "{name}.jpg"', shell=True)
-                        await m.reply_video(f"{name}",caption=cc, supports_streaming=True,height=720,width=1280,thumb=thumbnail,duration=dur,progress=progress_bar,progress_args=(reply,start_time))
-                        count+=1
-                        os.remove(f"{name}")
-                        os.remove(f"{name}.jpg")
-                        await reply.delete (True)
-                except Exception as e:
-                  await m.reply_text(e)
-                  continue
-    except Exception as e:
-        await m.reply_text(e)
-    await m.reply_text("Done")
-            #continue
-
-    
 bot.run()
