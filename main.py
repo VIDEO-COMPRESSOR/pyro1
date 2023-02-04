@@ -44,9 +44,9 @@ async def account_login(bot: Client, m: Message):
     global cancel
     cancel = False
     editable = await m.reply_text("**Send Text file containing Urls**")
-    input: Message = await bot.listen(editable.chat.id)
-    x = await input.download()
-    await input.delete(True)
+    #input: Message = await bot.listen(editable.chat.id)
+   # x = await input.download()
+   # await input.delete(True)
 
     path = f"./downloads/"
 
