@@ -26,7 +26,7 @@ import io
 
 res = "NA"
 
-def down():
+async def down(bot: Client, m: Message):
     res_file = await helper.download_video(url, cmd, name)
     filename = res_file
     m.reply_text("😌😮😍💔")
