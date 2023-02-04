@@ -30,7 +30,7 @@ import io
 #import pycurl
 
 res = "NA"
-ytf = out["unknown"]
+
 
 bot = Client("bot",
              bot_token=os.environ.get("BOT_TOKEN","5696138411:AAE2hRzQZeWwtBUqz6Lvt-KWyj6FBc4Y860"),
@@ -155,7 +155,20 @@ async def account_login(bot: Client, m: Message):
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()
 
-            
+            cmd = f'yt-dlp -F "{url}"'
+            k = await helper.run(cmd)
+            out = helper.vid_info(str(k))
+            if '256x144' in out:
+                ytf = f"{out['256x144']}"
+            elif '320x180' in out:
+                ytf = out['320x180']
+            elif 'unknown' in out:
+                ytf = out["unknown"]
+            else:
+                 for data1 in out:
+                     ytf = out[data1]
+                     await m.reply_text("** I think it's Looks like Error 😆**")
+                        
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
             elif "youtu" in url:
