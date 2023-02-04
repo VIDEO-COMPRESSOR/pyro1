@@ -23,26 +23,13 @@ from pyrogram.types import User, Message
 import re
 import os
 import io
-import threading
-
-
-
-
-def print_cube():
-    m.reply_text("**Now in Downloading ✅*")
-    res_file = helper.download_video(url, cmd, name)
-    filename = res_file
-    m.reply_text("**Now in uploading ✅**")
-    helper.send_vid(bot, m, cc, filename, thumb, name,
-                                          prog)
-    m.reply_text("**Done video✅**")
-    count += 1
- 
- 
-
-
 
 res = "NA"
+
+def down():
+    res_file = await helper.download_video(url, cmd, name)
+    filename = res_file
+    m.reply_text("😌😮😍💔")
 
 
 bot = Client("bot",
@@ -210,7 +197,17 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    print_cube() 
+                    await m.reply_text("**Now in Downloading ✅*")
+                    #res_file = await helper.download_video(url, cmd, name)
+                    #filename = res_file
+                    down()
+                    await m.reply_text("**Now in uploading ✅**")
+                    await helper.send_vid(bot, m, cc, filename, thumb, name,
+                                          prog)
+                    await m.reply_text("**Done video✅**")
+                    count += 1
+                   
+                    
             except Exception as e:
                 await m.reply_text(
                     f"**downloading failed ❌**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`"
