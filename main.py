@@ -29,6 +29,40 @@ import os
 import io
 #import pycurl
 
+import urllib
+import urllib.parse
+import requests
+import json
+import subprocess
+from pyrogram.types.messages_and_media import message
+import helper
+from pyromod import listen
+from pyrogram.types import Message
+import tgcrypto
+import pyrogram
+from pyrogram import Client, filters
+from pyrogram.types.messages_and_media import message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import FloodWait
+import time
+from pyrogram.types import User, Message
+from p_bar import progress_bar
+import subprocess
+from subprocess import getstatusoutput
+import logging
+import os
+import sys
+import re
+from pyrogram import Client as bot
+import cloudscraper
+#from Crypto.Cipher import AES
+#from Crypto.Util.Padding import unpad
+from base64 import b64encode, b64decode
+
+
+
+
+
 
 
 bot = Client("bot",
