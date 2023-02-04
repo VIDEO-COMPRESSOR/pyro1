@@ -28,8 +28,8 @@ import threading
 
 
 
-async def print_cube():
-    await m.reply_text("**Now in Downloading ✅*")
+def print_cube():
+    m.reply_text("**Now in Downloading ✅*")
     res_file = await helper.download_video(url, cmd, name)
     filename = res_file
     await m.reply_text("**Now in uploading ✅**")
