@@ -30,7 +30,7 @@ import io
 #import pycurl
 
 res = "NA"
-
+ytf = out["unknown"]
 
 bot = Client("bot",
              bot_token=os.environ.get("BOT_TOKEN","5696138411:AAE2hRzQZeWwtBUqz6Lvt-KWyj6FBc4Y860"),
