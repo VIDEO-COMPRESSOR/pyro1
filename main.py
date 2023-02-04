@@ -1,4 +1,4 @@
-#from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
+from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 import requests
 import json
 import subprocess
@@ -26,7 +26,7 @@ import io
 
 res = "NA"
 
-def down():
+async def down():
     m.reply_text("✅✅")
     res_file = helper.download_video(url, cmd, name)
     filename = res_file
