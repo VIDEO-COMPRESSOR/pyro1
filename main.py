@@ -29,7 +29,7 @@ import os
 import io
 #import pycurl
 
-
+res = "NA"
 
 
 bot = Client("bot",
@@ -155,47 +155,7 @@ async def account_login(bot: Client, m: Message):
             url = links[i][1]
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()
 
-            if raw_text2 == "0":
-                await m.reply_text("**Raw text 2 == 0 ✅**")
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                # print(out)
-                if '256x144' in out:
-                    ytf = f"{out['256x144']}"
-                    await m.reply_text("**256 144 ✅**")
-                elif '320x180' in out:
-                    ytf = out['320x180']
-                    await m.reply_text("**320x180 ✅**")
-                elif 'unknown' in out:
-                    ytf = out["unknown"]
-                    await m.reply_text("** unknown ✅**")
-                else:
-                    for data1 in out:
-                        ytf = out[data1]
-                        await m.reply_text("**else 1 ✅**")
-            else:
-                cmd = f'yt-dlp -F "{url}"'
-                k = await helper.run(cmd)
-                out = helper.vid_info(str(k))
-                for dataS in out:
-                    ytf = out[dataS]
-                    await m.reply_text("**else 2 ✅**")
-
-            try:
-                if "unknown" in out:
-                    res = "NA"
-                    await m.reply_text("** unknown NA ✅**")
-                else:
-                    res = list(out.keys())[list(out.values()).index(ytf)]
-                    await m.reply_text("**unknown else NA✅**")
-
-                name = f'{str(count).zfill(3)}) {name1} {res}'
-            except Exception:
-                res = "NA"
-
-            # if "youtu" in url:
-            # if ytf == f"'bestvideo[height<={raw_text2}][ext=mp4]+bestaudio[ext=m4a]'" or "acecwply" in url:
+            
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
             elif "youtu" in url:
