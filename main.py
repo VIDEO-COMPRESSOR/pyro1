@@ -64,7 +64,7 @@ async def restart_handler(_, m):
     await m.reply_text("Restarted!", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-async def down(bot: Client, m: Message):
+async def downlabe(bot: Client, m: Message):
     res_file = await helper.download_video(url, cmd, name)
     filename = res_file
     m.reply_text("😌😮😍💔")
@@ -203,7 +203,7 @@ async def account_login(bot: Client, m: Message):
                     await m.reply_text("**Now in Downloading ✅*")
                     #res_file = await helper.download_video(url, cmd, name)
                     #filename = res_file
-                    down()
+                    downlabe()
                     await m.reply_text("**Now in uploading ✅**")
                     await helper.send_vid(bot, m, cc, filename, thumb, name,
                                           prog)
