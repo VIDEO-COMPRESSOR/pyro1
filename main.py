@@ -156,32 +156,39 @@ async def account_login(bot: Client, m: Message):
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").strip()
 
             if raw_text2 == "0":
-
+                await m.reply_text("**Raw text 2 == 0 ✅**")
                 cmd = f'yt-dlp -F "{url}"'
                 k = await helper.run(cmd)
                 out = helper.vid_info(str(k))
                 # print(out)
                 if '256x144' in out:
                     ytf = f"{out['256x144']}"
+                    await m.reply_text("**256 144 ✅**")
                 elif '320x180' in out:
                     ytf = out['320x180']
+                    await m.reply_text("**320x180 ✅**")
                 elif 'unknown' in out:
                     ytf = out["unknown"]
+                    await m.reply_text("** unknown ✅**")
                 else:
                     for data1 in out:
                         ytf = out[data1]
+                        await m.reply_text("**else 1 ✅**")
             else:
                 cmd = f'yt-dlp -F "{url}"'
                 k = await helper.run(cmd)
                 out = helper.vid_info(str(k))
                 for dataS in out:
                     ytf = out[dataS]
+                    await m.reply_text("**else 2 ✅**")
 
             try:
                 if "unknown" in out:
                     res = "NA"
+                    await m.reply_text("** unknown NA ✅**")
                 else:
                     res = list(out.keys())[list(out.values()).index(ytf)]
+                    await m.reply_text("**unknown else NA✅**")
 
                 name = f'{str(count).zfill(3)}) {name1} {res}'
             except Exception:
@@ -197,12 +204,15 @@ async def account_login(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}+bestaudio" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
             elif "m3u8" or "livestream" in url:
                 cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+                await m.reply_text("**link m3u8 ✅**")
             elif ytf == "0" or "unknown" in out:
                 cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+                await m.reply_text("** link unknown based✅**")
             elif ".pdf" or "download" in url:
                 cmd = "pdf"
             else:
                 cmd = f'yt-dlp -f "{ytf}+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+                await m.reply_text("** link not detected ✅**")
 
             try:
                 Show = f"**Downloading:-**\n\n**Name :-** `{name}\nQuality - {raw_text2}`\n\n**Url :-** `{url}`"
@@ -211,12 +221,13 @@ async def account_login(bot: Client, m: Message):
                 cc1 = f"**Name »** ** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
                 
                 if cmd == "pdf" or ".pdf" in url or ".pdf" in name:
+                    await m.reply_text("**link pdf check ✅**")
                     try:
                         ka = await helper.aio(url, name)
                         await prog.delete(True)
-                        time.sleep(1)
+                        
                         reply = await m.reply_text(f"Uploading - ```{name}```")
-                        time.sleep(1)
+                        
                         start_time = time.time()
                         await m.reply_document(
                             ka,
@@ -224,11 +235,11 @@ async def account_login(bot: Client, m: Message):
                             f"**Name »** {name1} {res}.pdf\n**Batch »** {raw_text0}\n**Index »** {str(count).zfill(3)}"
                         )
                         count += 1
-                        # time.sleep(1)
+                        
                         await reply.delete(True)
-                        #time.sleep(1)
+                       
                         os.remove(ka)
-                        #time.sleep(1)
+                       
                     except FloodWait as e:
                         await m.reply_text(str(e))
                         time.sleep(e.x)
@@ -243,7 +254,7 @@ async def account_login(bot: Client, m: Message):
                                           prog)
                     await m.reply_text("**Now in Last Portion 3 ✅**")
                     count += 1
-                    #time.sleep(1)
+                   
                     await m.reply_text("**Now in Last Portion 4 ✅**")
             except Exception as e:
                 await m.reply_text(
