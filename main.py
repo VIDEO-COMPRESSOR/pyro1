@@ -82,7 +82,7 @@ async def account_login(bot: Client, m: Message):
     raw_text4 = ""
 
     editable4= await m.reply_text("Now send the **Thumb url**\nEg : ```https://telegra.ph/file/cef3ef6ee69126c23bfe3.jpg```\n\nor Send **no**")
-    input6 = message = await bot.listen(editable.chat.id)
+    #input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = "no"
     thumb = "no"
     if thumb.startswith("http://") or thumb.startswith("https://"):
