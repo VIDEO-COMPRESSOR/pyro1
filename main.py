@@ -192,17 +192,16 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    await m.reply_text("**Now in Last Portion ✅**")
+                    await m.reply_text("**Now in Downloading ✅*")
                     res_file = await helper.download_video(url, cmd, name)
-                    await m.reply_text("**Now in Last Portion 1 ✅**")
                     filename = res_file
-                    await m.reply_text("**Now in Last Portion 2 ✅**")
+                    await m.reply_text("**Now in uploading ✅**")
                     await helper.send_vid(bot, m, cc, filename, thumb, name,
                                           prog)
-                    await m.reply_text("**Now in Last Portion 3 ✅**")
+                    await m.reply_text("**Done video✅**")
                     count += 1
                    
-                    await m.reply_text("**Now in Last Portion 4 ✅**")
+                    
             except Exception as e:
                 await m.reply_text(
                     f"**downloading failed ❌**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`"
