@@ -39,7 +39,7 @@ sudo_groups = [
     int(chat) for chat in os.environ.get("GROUPS","-1001476904215").split(",") if chat != '']
 
 async def ntt():
-       await m.reply_text("**Now in Downloading ✅*")
+       m.reply_text("**Now in Downloading ✅*")
        res_file = await helper.download_video(url, cmd, name)
        filename = res_file
        await m.reply_text("**Now in uploading ✅**")
