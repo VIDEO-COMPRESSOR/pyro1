@@ -46,7 +46,7 @@ sudo_groups = [
 
 
 
-def FunctionforThread():
+async def FunctionforThread():
             if raw_text2 == "0":
 
                 cmd = f'yt-dlp -F "{url}"'
