@@ -169,20 +169,7 @@ async def account_login(bot: Client, m: Message):
                      ytf = out[data1]
                      await m.reply_text("** I think it's Looks like Error 😆**")
             
-            try:
-                if "unknown" in out:
-                    res = "NA"
-                    await m.reply_text("** unknown NA ✅**")
-                else:
-                    res = list(out.keys())[list(out.values()).index(ytf)]
-                    await m.reply_text("**unknown else NA✅**")
-
-                name = f'{str(count).zfill(3)}) {name1} {res}'
-                await m.reply_text("**Nane Found✅**")
-            except Exception:
-                res = "NA"
-            
-                        
+            name = f'{str(count).zfill(3)}) {name1} {res}'
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
             elif "youtu" in url:
