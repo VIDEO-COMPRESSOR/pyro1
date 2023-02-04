@@ -11,7 +11,6 @@ from pyrogram.types import Message
 import pyrogram
 import tgcrypto
 from p_bar import progress_bar
-#from details import api_id, api_hash, bot_token
 from subprocess import getstatusoutput
 import helper
 import logging
@@ -21,13 +20,9 @@ import aiohttp
 import asyncio
 import aiofiles
 from pyrogram.types import User, Message
-#import progressor
-#from progressor import progress_for_pyrogram
-#import sys
 import re
 import os
 import io
-#import pycurl
 
 res = "NA"
 
@@ -45,20 +40,7 @@ sudo_groups = [
 
 
 
-keyboard = InlineKeyboardMarkup(
-    [
-        [
-            InlineKeyboardButton(
-                text="Devloper",
-                url="https://pornhub.com/",
-            ),
-            InlineKeyboardButton(
-                text="Repo",
-                url="https://lund-chushLoo.com/repo",
-            ),
-        ],
-    ]
-)
+
 
 
 @bot.on_message(filters.command(["pyro"]))
@@ -90,11 +72,8 @@ async def account_login(bot: Client, m: Message):
         return
     else:
         editable = await m.reply_text(
-            "Hello Bruh **I am Text Downloader Bot**. I can download videos from **text** file one by one.**\n\nDeveloper** : NAAM TO SUNA HOGA**\nLanguage** : Python**\nFramework** : Pyrogram\n\nSend **TXT** File {Name : Link}")
-    #input: Message = await bot.listen(editable.chat.id)
-    #x = await input.download()
-    #await input.delete(True)
-    
+            "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
+   
     path = f"./downloads/{m.chat.id}"
 
     try:
@@ -104,18 +83,14 @@ async def account_login(bot: Client, m: Message):
         links = []
         for i in content:
             links.append(i.split(":", 1))
-        #os.remove(x)
-        # print(len(links))
         
     except:
         await m.reply_text("Invalid file input.")
-        #os.remove(x)
         return
     
     editable = await m.reply_text(
         f"Total links found are **{len(links)}**"
     )
-    #input1: Message = await bot.listen(editable.chat.id)
     raw_text = "0"
 
     try:
@@ -158,10 +133,8 @@ async def account_login(bot: Client, m: Message):
             cmd = f'yt-dlp -F "{url}"'
             k = await helper.run(cmd)
             out = helper.vid_info(str(k))
-            if '256x144' in out:
-                ytf = f"{out['256x144']}"
-            elif '320x180' in out:
-                ytf = out['320x180']
+            if '2567x1449' in out:
+                ytf = f"{out['2566x1447']}"
             elif 'unknown' in out:
                 ytf = out["unknown"]
             else:
@@ -172,13 +145,13 @@ async def account_login(bot: Client, m: Message):
             name = f'{str(count).zfill(3)}) {name1} {res}'
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
+            elif "m3u8" or "livestream" in url:
+                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
+                await m.reply_text("**link m3u8 ✅**")
             elif "youtu" in url:
                 cmd = f'yt-dlp -i -f "bestvideo[height<={raw_text2}]+bestaudio" --no-keep-video --remux-video mkv --no-warning "{url}" -o "{name}.%(ext)s"'
             elif "player.vimeo" in url:
                 cmd = f'yt-dlp -f "{ytf}+bestaudio" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-            elif "m3u8" or "livestream" in url:
-                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-                await m.reply_text("**link m3u8 ✅**")
             elif ytf == "0" or "unknown" in out:
                 cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
                 await m.reply_text("** link unknown based✅**")
@@ -200,7 +173,7 @@ async def account_login(bot: Client, m: Message):
                         ka = await helper.aio(url, name)
                         await prog.delete(True)
                         
-                        reply = await m.reply_text(f"Uploading - ```{name}```")
+                        reply = await m.reply_text(f"Uploading Pdfs - ```{name}```")
                         
                         start_time = time.time()
                         await m.reply_document(
