@@ -27,7 +27,6 @@ import io
 res = "NA"
 
 
-
 bot = Client("bot",
              bot_token=os.environ.get("BOT_TOKEN","5696138411:AAE2hRzQZeWwtBUqz6Lvt-KWyj6FBc4Y860"),
              #bot_token=os.environ.get("BOT_TOKEN","5436870859:AAFJxvm5CuWMCUyqoN7VHHNR5QLKxS0wd1U"),
@@ -63,13 +62,6 @@ async def cancel(_, m):
 async def restart_handler(_, m):
     await m.reply_text("Restarted!", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
-
-async def downlabe(bot: Client, m: Message):
-    res_file = await helper.download_video(url, cmd, name)
-    filename = res_file
-    m.reply_text("😌😮😍💔")
-
-
 
 
 @bot.on_message(filters.command(["pro"]))
@@ -201,9 +193,8 @@ async def account_login(bot: Client, m: Message):
                         continue
                 else:
                     await m.reply_text("**Now in Downloading ✅*")
-                    #res_file = await helper.download_video(url, cmd, name)
-                    #filename = res_file
-                    downlabe()
+                    res_file = await helper.download_video(url, cmd, name)
+                    filename = res_file
                     await m.reply_text("**Now in uploading ✅**")
                     await helper.send_vid(bot, m, cc, filename, thumb, name,
                                           prog)
