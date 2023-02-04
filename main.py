@@ -26,10 +26,6 @@ import io
 
 res = "NA"
 
-async def down(bot: Client, m: Message):
-    res_file = await helper.download_video(url, cmd, name)
-    filename = res_file
-    m.reply_text("😌😮😍💔")
 
 
 bot = Client("bot",
@@ -67,6 +63,13 @@ async def cancel(_, m):
 async def restart_handler(_, m):
     await m.reply_text("Restarted!", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
+
+async def down(bot: Client, m: Message):
+    res_file = await helper.download_video(url, cmd, name)
+    filename = res_file
+    m.reply_text("😌😮😍💔")
+
+
 
 
 @bot.on_message(filters.command(["pro"]))
