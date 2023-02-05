@@ -127,6 +127,7 @@ async def account_login(bot: Client, m: Message):
     await dengo()
 async def dengo():
     try:
+        arg = 0
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
             url = links[i][1]
