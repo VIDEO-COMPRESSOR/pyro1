@@ -109,7 +109,24 @@ async def run(cmd):
     if stderr:
         return f'[stderr]\n{stderr.decode()}'
 
-    
+
+
+async def newrun(cmd):
+    proc = await asyncio.create_subprocess_shell(
+        cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE)
+
+    stdout, stderr = await proc.communicate()
+
+    print(f'[{cmd!r} exited with {proc.returncode}]')
+    if proc.returncode == 1:
+        return False
+    if stdout:
+        return f'[stdout]\n{stdout.decode()}'
+    if stderr:
+        return f'[stderr]\n{stderr.decode()}'
+
     
     
 def old_download(url, file_name, chunk_size = 1024 * 10):
