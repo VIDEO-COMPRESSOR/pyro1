@@ -23,6 +23,8 @@ from pyrogram.types import User, Message
 import re
 import os
 import io
+import threading
+
 
 res = "NA"
 
@@ -64,7 +66,7 @@ async def restart_handler(_, m):
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-@bot.on_message(filters.command(["pro"]))
+#@bot.on_message(filters.command(["pro"]))
 async def account_login(bot: Client, m: Message):
     user = m.from_user.id if m.from_user is not None else None
     if user is not None and user not in sudo_users:
@@ -92,24 +94,12 @@ async def account_login(bot: Client, m: Message):
         f"Total links found are **{len(links)}**"
     )
     raw_text = "0"
-
     try:
         arg = int(raw_text)
     except:
         arg = 0
-
-    #editable = await m.reply_text("**Enter Title**")
-    #input0: Message = await bot.listen(editable.chat.id)
     raw_text0 = "CLASSPLUS"
-
-    #await m.reply_text("**Enter resolution**")
-    #input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = "0"
-
-    #editable4 = await m.reply_text(
-    #    "Now send the **Thumb url**\nEg : ```https://telegra.ph/file/d9e24878bd4aba05049a1.jpg```\n\nor Send **no**"
-   # )
-   # input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = "no"
 
     thumb = "no"
@@ -123,11 +113,8 @@ async def account_login(bot: Client, m: Message):
         count = 1
     else:
         count = int(raw_text)
-        
-    await dengo()
-async def dengo():
+
     try:
-        arg = 0
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
             url = links[i][1]
@@ -214,6 +201,12 @@ async def dengo():
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
-    
+
+
+thread1 = threading.Thread(target=account_login)
+
+@bot.on_message(filters.command(["pro"]))
+thread1.start()
+
 
 bot.run()
