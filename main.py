@@ -71,7 +71,7 @@ async def account_login(bot: Client, m: Message):
 
     raw_text0 = "CLASSPLUS" #batch name
     raw_text2 = "0" #resolution
-    thumb == "no"
+    thumb = "no"
 
 
     try:
