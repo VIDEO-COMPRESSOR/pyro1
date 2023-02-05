@@ -28,8 +28,8 @@ res = "NA"
 
 
 bot = Client("bot",
-             bot_token=os.environ.get("BOT_TOKEN","5696138411:AAE2hRzQZeWwtBUqz6Lvt-KWyj6FBc4Y860"),
-             #bot_token=os.environ.get("BOT_TOKEN","5436870859:AAFJxvm5CuWMCUyqoN7VHHNR5QLKxS0wd1U"),
+             #bot_token=os.environ.get("BOT_TOKEN","5696138411:AAE2hRzQZeWwtBUqz6Lvt-KWyj6FBc4Y860"),
+             bot_token=os.environ.get("BOT_TOKEN","5436870859:AAFJxvm5CuWMCUyqoN7VHHNR5QLKxS0wd1U"),
              api_id=int(os.environ.get("API_ID","952608")),
              api_hash=os.environ.get("API_HASH","8d8d0ad8e3d4bcd54420190f57da78ad"))
 auth_users = [
