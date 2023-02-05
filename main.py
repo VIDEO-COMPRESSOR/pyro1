@@ -68,11 +68,11 @@ async def account_login(bot: Client, m: Message):
         f"Total links found are **{len(links)}**"
     )
     count = 1
-
+    arg = 0
     raw_text0 = "CLASSPLUS" #batch name
     raw_text2 = "0" #resolution
     thumb = "no"
-    arg = 0
+
 
     try:
         for i in range(arg, len(links)):
@@ -93,18 +93,9 @@ async def account_login(bot: Client, m: Message):
                      await m.reply_text("** I think it's Looks like Error 😆**")
             
             name = f'{str(count).zfill(3)}) {name1} {res}'
-            if "acecwply" in url:
-                cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
-            elif "m3u8" or "livestream" in url:
+            if "m3u8" or "livestream" in url:
                 cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
                 await m.reply_text("**link m3u8 ✅**")
-            elif "youtu" in url:
-                cmd = f'yt-dlp -i -f "bestvideo[height<={raw_text2}]+bestaudio" --no-keep-video --remux-video mkv --no-warning "{url}" -o "{name}.%(ext)s"'
-            elif "player.vimeo" in url:
-                cmd = f'yt-dlp -f "{ytf}+bestaudio" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-            elif ytf == "0" or "unknown" in out:
-                cmd = f'yt-dlp -f "{ytf}" --no-keep-video --remux-video mkv "{url}" -o "{name}.%(ext)s"'
-                await m.reply_text("** link unknown based✅**")
             elif ".pdf" or "download" in url:
                 cmd = "pdf"
             else:
