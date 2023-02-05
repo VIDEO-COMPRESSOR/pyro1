@@ -23,8 +23,6 @@ from pyrogram.types import User, Message
 import re
 import os
 import io
-import threading
-
 
 res = "NA"
 
@@ -45,38 +43,14 @@ sudo_groups = [
 
 
 
-@bot.on_message(filters.command(["pyro"]))
+
+
+@bot.on_message(filters.command(["pro"]))
 async def account_login(bot: Client, m: Message):
-
- editable = await m.reply_text("**Hi Press**\n**Text** = /pro_txt\n**Top** = /pro_top\n**Vision** = /pro_vision\n**Jw** = /pro_jw\n**Olive** = /pro_olive\n**Addapdf** = /adda_pdf")
-
-
-@bot.on_message(filters.command(["cancel"]))
-async def cancel(_, m):
-    editable = await m.reply_text("Canceling All process Plz wait\n🚦🚦 Last Process Stopped 🚦🚦")
-    global cancel
-    cancel = True
-    await editable.edit("cancled")
-    return
-
-
-@bot.on_message(filters.command("restart"))
-async def restart_handler(_, m):
-    await m.reply_text("Restarted!", True)
-    os.execl(sys.executable, sys.executable, *sys.argv)
-
-
-#@bot.on_message(filters.command(["pro"]))
-async def account_login(bot: Client, m: Message):
-    user = m.from_user.id if m.from_user is not None else None
-    if user is not None and user not in sudo_users:
-        await m.reply("**bhag bhosadi ke", quote=True)
-        return
-    else:
-        editable = await m.reply_text(
+    editable = await m.reply_text(
             "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
    
-    path = f"./downloads/{m.chat.id}"
+    path = f"./downloads/"
 
     try:
         with open("NTT.txt", "r") as f:
@@ -93,26 +67,12 @@ async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
         f"Total links found are **{len(links)}**"
     )
-    raw_text = "0"
-    try:
-        arg = int(raw_text)
-    except:
-        arg = 0
-    raw_text0 = "CLASSPLUS"
-    raw_text2 = "0"
-    raw_text6 = "no"
+    count = 1
 
-    thumb = "no"
-    if thumb.startswith("http://") or thumb.startswith("https://"):
-        getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
-        thumb = "thumb.jpg"
-    else:
-        thumb == "no"
+    raw_text0 = "CLASSPLUS" #batch name
+    raw_text2 = "0" #resolution
+    thumb == "no"
 
-    if raw_text == '0':
-        count = 1
-    else:
-        count = int(raw_text)
 
     try:
         for i in range(arg, len(links)):
@@ -201,12 +161,5 @@ async def account_login(bot: Client, m: Message):
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
-
-
-thread1 = threading.Thread(target=account_login)
-
-@bot.on_message(filters.command(["pro"]))
-    thread1.start()
-
 
 bot.run()
