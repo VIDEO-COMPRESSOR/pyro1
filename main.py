@@ -123,6 +123,8 @@ async def account_login(bot: Client, m: Message):
         count = 1
     else:
         count = int(raw_text)
+        
+    dengo()
 async def dengo():
     try:
         for i in range(arg, len(links)):
@@ -212,5 +214,5 @@ async def dengo():
         await m.reply_text(e)
     await m.reply_text("Done")
     
-dengo()
+
 bot.run()
