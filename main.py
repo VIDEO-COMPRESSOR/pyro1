@@ -212,5 +212,5 @@ async def dengo():
         await m.reply_text(e)
     await m.reply_text("Done")
     
-    dengo()
+dengo()
 bot.run()
