@@ -211,5 +211,6 @@ async def dengo():
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
-
+    
+    dengo()
 bot.run()
