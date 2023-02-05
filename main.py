@@ -124,7 +124,7 @@ async def account_login(bot: Client, m: Message):
     else:
         count = int(raw_text)
         
-    dengo()
+    await dengo()
 async def dengo():
     try:
         for i in range(arg, len(links)):
