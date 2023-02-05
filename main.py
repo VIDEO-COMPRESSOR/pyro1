@@ -206,7 +206,7 @@ async def account_login(bot: Client, m: Message):
 thread1 = threading.Thread(target=account_login)
 
 @bot.on_message(filters.command(["pro"]))
-thread1.start()
+    thread1.start()
 
 
 bot.run()
