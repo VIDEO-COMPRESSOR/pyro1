@@ -170,6 +170,6 @@ t1.start()
 t2.start()
 t1.join()
 t2.join()
-await m.reply_text(" 2 thread Activated 🥶.")
+m.reply_text(" 2 thread Activated 🥶.")
 
 bot.run()
