@@ -40,11 +40,6 @@ sudo_groups = [
 
 
 
-async def decc(bot: Client, m: Message) :
-      
-
-
-
 
 @bot.on_message(filters.command(["start"]))
 async def login(bot: Client, m: Message):
