@@ -40,8 +40,54 @@ sudo_groups = [
 
 
 
+async def decc() :
+      await m.reply_text("**Now in Downloading ✅*")
+      res_file = await helper.download_video(url, cmd, name)
+      filename = res_file
+      await m.reply_text("**Now in uploading ✅**")
+      await helper.send_vid(bot, m, cc, filename, thumb, name,
+                            prog)
+      await m.reply_text("**Done video✅**")
+      count += 1
 
-async def Deccer():
+
+
+
+@bot.on_message(filters.command(["pro"]))
+async def account_login(bot: Client, m: Message):
+    editable = await m.reply_text(
+            "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
+   
+    path = f"./downloads/"
+
+    try:
+        with open("NTT.txt", "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        global links
+        links = []
+        for i in content:
+            links.append(i.split(":", 1))
+        
+    except:
+        await m.reply_text("Invalid file input.")
+        return
+    
+    editable = await m.reply_text(
+        f"Total links found are **{len(links)}**"
+    )
+    global count
+    global arg
+    global raw_text0
+    global thumb
+    global raw_text2
+    count = 1
+    arg = 0
+    raw_text0 = "CLASSPLUS" #batch name
+    raw_text2 = "0" #resolution
+    thumb = "no"
+
+
     try:
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
@@ -101,14 +147,7 @@ async def Deccer():
                         time.sleep(e.x)
                         continue
                 else:
-                    await m.reply_text("**Now in Downloading ✅*")
-                    res_file = await helper.download_video(url, cmd, name)
-                    filename = res_file
-                    await m.reply_text("**Now in uploading ✅**")
-                    await helper.send_vid(bot, m, cc, filename, thumb, name,
-                                          prog)
-                    await m.reply_text("**Done video✅**")
-                    count += 1
+                    await decc():
                    
                     
             except Exception as e:
@@ -120,46 +159,5 @@ async def Deccer():
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("Done")
-
-
-
-
-
-
-@bot.on_message(filters.command(["pro"]))
-async def account_login(bot: Client, m: Message):
-    editable = await m.reply_text(
-            "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
-   
-    path = f"./downloads/"
-
-    try:
-        with open("NTT.txt", "r") as f:
-            content = f.read()
-        content = content.split("\n")
-        global links
-        links = []
-        for i in content:
-            links.append(i.split(":", 1))
-        
-    except:
-        await m.reply_text("Invalid file input.")
-        return
-    
-    editable = await m.reply_text(
-        f"Total links found are **{len(links)}**"
-    )
-    global count
-    global arg
-    global raw_text0
-    global thumb
-    global raw_text2
-    count = 1
-    arg = 0
-    raw_text0 = "CLASSPLUS" #batch name
-    raw_text2 = "0" #resolution
-    thumb = "no"
-    await Deccer()
-
 
 bot.run()
