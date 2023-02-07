@@ -23,6 +23,8 @@ from pyrogram.types import User, Message
 import re
 import os
 import io
+import threading
+
 
 res = "NA"
 
@@ -40,41 +42,6 @@ sudo_groups = [
 
 
 
-
-@bot.on_message(filters.command(["start"]))
-async def login(bot: Client, m: Message):
-    editable = await m.reply_text(
-            "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
-   
-    path = f"./downloads/"
-
-    try:
-        with open("NTT.txt", "r") as f:
-            content = f.read()
-        content = content.split("\n")
-        global links
-        links = []
-        for i in content:
-            links.append(i.split(":", 1))
-        
-    except:
-        await m.reply_text("Invalid file input.")
-        return
-    
-    editable = await m.reply_text(
-        f"Total links found are **{len(links)}**"
-    )
-   # global count
-    global arg
-    global raw_text0
-    global thumb
-    global raw_text2
-    
-    arg = 0
-    raw_text0 = "CLASSPLUS" #batch name
-    raw_text2 = "0" #resolution
-    thumb = "no"
-    await m.reply_text("Succesfully Bot Loaded 😍🥰.")
 
 
 @bot.on_message(filters.command(["pro"]))
@@ -159,4 +126,50 @@ async def account_login(bot: Client, m: Message):
         await m.reply_text(e)
     await m.reply_text("Done")
 
+
+
+@bot.on_message(filters.command(["start"]))
+async def login(bot: Client, m: Message):
+    editable = await m.reply_text(
+            "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
+   
+    path = f"./downloads/"
+
+    try:
+        with open("NTT.txt", "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        global links
+        links = []
+        for i in content:
+            links.append(i.split(":", 1))
+        
+    except:
+        await m.reply_text("Invalid file input.")
+        return
+    
+    editable = await m.reply_text(
+        f"Total links found are **{len(links)}**"
+    )
+   # global count
+    global arg
+    global raw_text0
+    global thumb
+    global raw_text2
+    
+    arg = 0
+    raw_text0 = "CLASSPLUS" #batch name
+    raw_text2 = "0" #resolution
+    thumb = "no"
+    await m.reply_text("Succesfully Bot Loaded 😍🥰.")
+    t1 = threading.Thread(target=account_login, args=(bot, m)
+    t2 = threading.Thread(target=account_login, args=(bot, m)  
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+    await m.reply_text(" 2 thread Activated 🥶.")
+    
+    
+    
 bot.run()
