@@ -64,12 +64,12 @@ async def login(bot: Client, m: Message):
     editable = await m.reply_text(
         f"Total links found are **{len(links)}**"
     )
-    global count
+   # global count
     global arg
     global raw_text0
     global thumb
     global raw_text2
-    count = 1
+    
     arg = 0
     raw_text0 = "CLASSPLUS" #batch name
     raw_text2 = "0" #resolution
@@ -79,7 +79,7 @@ async def login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["pro"]))
 async def account_login(bot: Client, m: Message):
-
+count = 1
 
     try:
         for i in range(arg, len(links)):
