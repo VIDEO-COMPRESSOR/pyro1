@@ -79,8 +79,7 @@ async def login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["pro"]))
 async def account_login(bot: Client, m: Message):
-count = 1
-
+    count = 1
     try:
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
