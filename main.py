@@ -41,20 +41,13 @@ sudo_groups = [
 
 
 async def decc(bot: Client, m: Message) :
-      #await m.reply_text("**Now in Downloading ✅*")
-      res_file = await helper.download_video(url, cmd, name)
-      filename = res_file
-      await m.reply_text("**Now in uploading ✅**")
-      await helper.send_vid(bot, m, cc, filename, thumb, name,
-                            prog)
-      await m.reply_text("**Done video✅**")
-      count += 1
+      
 
 
 
 
-@bot.on_message(filters.command(["pro"]))
-async def account_login(bot: Client, m: Message):
+@bot.on_message(filters.command(["start"]))
+async def login(bot: Client, m: Message):
     editable = await m.reply_text(
             "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
    
@@ -86,6 +79,11 @@ async def account_login(bot: Client, m: Message):
     raw_text0 = "CLASSPLUS" #batch name
     raw_text2 = "0" #resolution
     thumb = "no"
+    await m.reply_text("Succesfully Bot Loaded 😍🥰.")
+
+
+@bot.on_message(filters.command(["pro"]))
+async def account_login(bot: Client, m: Message):
 
 
     try:
@@ -147,7 +145,14 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    await decc()
+                    await m.reply_text("**Now in Downloading ✅*")
+                    res_file = await helper.download_video(url, cmd, name)
+                    filename = res_file
+                    await m.reply_text("**Now in uploading ✅**")
+                    await helper.send_vid(bot, m, cc, filename, thumb, name,
+                                            prog)
+                    await m.reply_text("**Done video✅**")
+                    count += 1
                    
                     
             except Exception as e:
