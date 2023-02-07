@@ -45,7 +45,7 @@ sudo_groups = [
 
 
 @bot.on_message(filters.command(["pro"]))
-async def account_login(bot: Client, m: Message):
+async def account_login():
     count = 1
     try:
         for i in range(arg, len(links)):
@@ -162,7 +162,7 @@ async def login(bot: Client, m: Message):
     raw_text2 = "0" #resolution
     thumb = "no"
     await m.reply_text("Succesfully Bot Loaded 😍🥰.")
-    t1 = threading.Thread(target=await account_login, args=(bot, m)) 
+    t1 = threading.Thread(target=account_login, args=(bot, m)) 
     await m.reply_text(" 2 thread Activated 🥶.")
     t1.start()
 
