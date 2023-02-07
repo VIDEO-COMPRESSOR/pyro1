@@ -45,7 +45,7 @@ sudo_groups = [
 
 
 @bot.on_message(filters.command(["pro"]))
-async def account_login():
+async def account_login(bot: Client, m: Message):
     count = 1
     try:
         for i in range(arg, len(links)):
@@ -129,7 +129,7 @@ async def account_login():
 
 
 @bot.on_message(filters.command(["start"]))
-async def login(bot: Client, m: Message):
+async def login():
     editable = await m.reply_text(
             "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
    
