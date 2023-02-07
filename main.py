@@ -164,7 +164,7 @@ async def login(bot: Client, m: Message):
     await m.reply_text("Succesfully Bot Loaded 😍🥰.")
     t1 = threading.Thread(target=account_login, args=(bot, m)) 
     await m.reply_text(" 2 thread Activated 🥶.")
-    t1.start()
+    await t1.start()
 
 
 
