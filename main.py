@@ -127,8 +127,6 @@ async def Deccer():
 
 
 @bot.on_message(filters.command(["pro"]))
-
-global def account_login(bot: Client, m: Message):
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
             "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
