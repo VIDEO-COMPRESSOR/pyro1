@@ -41,7 +41,7 @@ sudo_groups = [
 
 
 
-async def Deccer(bot: Client, m: Message):
+async def Deccer():
     try:
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
@@ -127,6 +127,8 @@ async def Deccer(bot: Client, m: Message):
 
 
 @bot.on_message(filters.command(["pro"]))
+global account_login
+
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(
             "Hello Bruh **I am Text Downloader Bot**.  **TXT** 👉{Name : Link}")
@@ -159,7 +161,7 @@ async def account_login(bot: Client, m: Message):
     raw_text0 = "CLASSPLUS" #batch name
     raw_text2 = "0" #resolution
     thumb = "no"
-    Deccer()
+    await Deccer()
 
 
 bot.run()
