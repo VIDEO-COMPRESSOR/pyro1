@@ -162,16 +162,20 @@ async def login(bot: Client, m: Message):
     raw_text2 = "0" #resolution
     thumb = "no"
     await m.reply_text("Succesfully Bot Loaded 😍🥰.")
- 
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+    t1 = threading.Thread(target=account_login, args=(bot, m)) 
     await m.reply_text(" 2 thread Activated 🥶.")
-
     
 
 
-t1 = threading.Thread(target=account_login, args=(bot, m)) 
-t2 = threading.Thread(target=account_login, args=(bot, m)) 
+
+
+#t2 = threading.Thread(target=account_login, args=(bot, m)) 
+
 bot.run()
+
+
+#t1.start()
+#    t2.start()
+#    t1.join()
+#    t2.join()
+  #  
