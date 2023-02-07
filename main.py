@@ -40,7 +40,7 @@ sudo_groups = [
 
 
 
-async def decc() :
+async def decc(bot: Client, m: Message) :
       await m.reply_text("**Now in Downloading ✅*")
       res_file = await helper.download_video(url, cmd, name)
       filename = res_file
@@ -147,7 +147,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    await decc()
+                    await decc():
                    
                     
             except Exception as e:
