@@ -41,7 +41,7 @@ sudo_groups = [
 
 
 
-async def Deccer():
+async def Deccer(bot: Client, m: Message):
     try:
         for i in range(arg, len(links)):
             await m.reply_text("**Now in Top Loop ✅**")
