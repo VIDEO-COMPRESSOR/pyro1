@@ -147,7 +147,7 @@ async def account_login(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    await decc():
+                    await decc()
                    
                     
             except Exception as e:
